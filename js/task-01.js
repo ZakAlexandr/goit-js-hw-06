@@ -22,8 +22,7 @@ console.log(getUsersWithEyeColor(users, 'blue')); // [объект Moore Hensley
 //=================task-3=======================
 //Получить массив имен пользователей по полу (поле gender).
 const getUsersWithGender = (users, gender) => {
-    const userWithGender = users.filter(user => user.gender === gender);
-    return userWithGender.map(user => user.name);
+    return users.filter(user =>user.gender === gender).map(user => user.name);
 };
 console.log(getUsersWithGender(users, 'male')); // [ 'Moore Hensley', 'Ross Vazquez', 'Carey Barr', 'Blackburn Dotson' ]
 
@@ -64,12 +63,9 @@ console.log(calculateTotalBalance(users)); // 20916
 //================task-8========================
 //Массив имен всех пользователей у которых есть друг с указанным именем.
 const getUsersWithFriend = (users, friendName) => {
-    return users.reduce((usersWhoHaveFriend, user) => {
-      if (user.friends.includes(friendName)) {
-        usersWhoHaveFriend.push(user.name);
-      }
-      return usersWhoHaveFriend;
-    }, []);
+    return users
+       .filter(user => user.friends.includes(friendName)) 
+       .map(user => user.name);
 };
 console.log(getUsersWithFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
 console.log(getUsersWithFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sheree Anthony' ]
@@ -78,8 +74,9 @@ console.log(getUsersWithFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sher
 //================task-9========================
 //Массив имен (поле name) людей, отсортированных в зависимости от количества их друзей (поле friends)
 const getNamesSortedByFriendsCount = users => {
-    const sortUser = users.sort((a, b) => a.friends.lenght - b.friends.lenght);
-    return sortUser.map(user => user.name);
+    return users
+        .sort((a, b) => a.friends.lenght -b.friends.lenght)
+        .map(user => user.name);
 };  
 console.log(getNamesSortedByFriendsCount(users));
 // [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
